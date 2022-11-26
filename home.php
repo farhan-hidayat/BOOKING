@@ -92,7 +92,7 @@
                                 </div>
 
                                 <div class="form-group form-control-material">
-                                    <input name="txtKontak" class="form-control" type="text" id="wiz-nohp1" placeholder="Nomor HP/ Telpon" />
+                                    <input name="txtKontak" class="form-control" type="number" id="wiz-nohp1" placeholder="Nomor HP/ Telpon" />
 
                                 </div>
 
