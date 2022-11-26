@@ -1,9 +1,9 @@
  <?php
- $SQL =mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM tboking WHERE usernameboking='$_SESSION[username]'");
- $_data=mysqli_fetch_array($SQL);
- $tgl = region($_data['tglInvoice']);
- $totalBayar=idr_f($_data['totalBayar']);
- echo"
+  $SQL = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM tboking WHERE usernameboking='$_SESSION[username]'");
+  $_data = mysqli_fetch_array($SQL);
+  $tgl = region($_data['tglInvoice']);
+  $totalBayar = idr_f($_data['totalBayar']);
+  echo "
   <div class='container'>
         <div class='jumbotron text-center bg-transparent margin-none'>
             <h1>RINCIAN TRANSAKSI ANDA</h1>
@@ -37,18 +37,17 @@
       - BCA (071828282)<br>
        - BRI (829283838)<br>
        - BNI (83984490)</td>
+       <a href='https://wa.me/6281251058515' target='_blank' class='btn btn-primary'>Sudah Bayar</a>
       <td>ATAS NAMA</td>
       <td><strong><label class='label label-primary'>$_data[an]</label></strong></td>
       <td>STATUS</td>
       <td colspan='2'>";
-	  if($_data['statusBayar']=="L"){
-		  echo"<strong><label class='label label-success'>LUNAS</label></strong>";
-		  }elseif($_data['statusBayar']=="B"){
-			  echo"<strong><label class='label label-danger'>BELUM LUNAS</label></strong>";
-			  
-			  
-			  }
-	  echo"</td>
+  if ($_data['statusBayar'] == "L") {
+    echo "<strong><label class='label label-success'>LUNAS</label></strong>";
+  } elseif ($_data['statusBayar'] == "B") {
+    echo "<strong><label class='label label-danger'>BELUM LUNAS</label></strong>";
+  }
+  echo "</td>
     </tr>
     <tr>
       <td>&nbsp;</td>
@@ -86,12 +85,12 @@
       <td><strong>HARGA</strong></td>
       <td colspan='2'><strong>SUBTOTAL</strong></td>
     </tr>";
-	$rincian=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM trincian_boking WHERE kdBoking='$_data[kdBoking]'");
-	while($r=mysqli_fetch_array($rincian)){
-		$tglboking=region($r['tglBoking']);
-		$harga=idr_f($r['hargaBoking']);
-		$subtotal = idr_f($r['subTotal']);
-		echo"
+  $rincian = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM trincian_boking WHERE kdBoking='$_data[kdBoking]'");
+  while ($r = mysqli_fetch_array($rincian)) {
+    $tglboking = region($r['tglBoking']);
+    $harga = idr_f($r['hargaBoking']);
+    $subtotal = idr_f($r['subTotal']);
+    echo "
 		<tr>
       <td><label class='label label-primary'><strong>$tglboking</strong></label></td>
       <td><label class='label label-primary'><strong>$r[jamBoking]</strong></label></td>
@@ -101,9 +100,8 @@
     </tr>
 		
 		";
-		
-		}
-    echo"
+  }
+  echo "
     <tr>
       <td colspan='10' align='right'><a href='javascript:; onClick=window.print()'><button class='btn btn-primary'><i class='fa fa-print'></i>&nbsp;Cetak Transaksi</button></td>
 
@@ -125,7 +123,7 @@
  
  
  ";
- 
- ?>
+
+  ?>
  
  
