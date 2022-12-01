@@ -102,8 +102,10 @@
 				  <td>";
                   if ($_data['statusBayar'] == "L") {
                     echo "Lunas";
-                  } else {
+                  } elseif ($_data['statusBayar'] == "B") {
                     echo "Belum Lunas";
+                  } else {
+                    echo "DP";
                   }
 
                   echo "</td>
@@ -121,26 +123,35 @@
 
               </tbody>
               <tfoot>
-                <th colspan="3">Total (Lunas)</th>
-                <th><?php $lunas = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT sum(totalbayar) as lunas FROM tboking where statusbayar='L' ORDER BY noInvoice ASC");
-                    $data_lunas = mysqli_fetch_array($lunas);
-                    $hasil = idr_f($data_lunas['lunas']);
+                <th colspan="2">Total</th>
+                <th colspan="2"><?php $lunas = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT sum(totalbayar) as lunas FROM tboking where statusbayar='L' ORDER BY noInvoice ASC");
+                                $data_lunas = mysqli_fetch_array($lunas);
+                                $hasil = idr_f($data_lunas['lunas']);
+                                if ($no % 2 == 1) {
+                                  $class = "gradeU";
+                                } else {
+                                  $class = "gradeX";
+                                }
+                                echo $hasil ?> (Lunas)</th>
+                <th colspan="2"><?php $galbay = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT sum(totalbayar) as galbay FROM tboking where statusbayar='B' ORDER BY noInvoice ASC");
+                                $data_galbay = mysqli_fetch_array($galbay);
+                                $hasil2 = idr_f($data_galbay['galbay']);
+                                if ($no % 2 == 1) {
+                                  $class = "gradeU";
+                                } else {
+                                  $class = "gradeX";
+                                }
+                                echo $hasil2 ?> (Belum Lunas)</th>
+                <th><?php $dp = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT sum(totalbayar) as dp FROM tboking where statusbayar='D' ORDER BY noInvoice ASC");
+                    $data_dp = mysqli_fetch_array($dp);
+                    $ddp = $data_dp['dp'] / 2;
+                    $hasil3 = idr_f($ddp);
                     if ($no % 2 == 1) {
                       $class = "gradeU";
                     } else {
                       $class = "gradeX";
                     }
-                    echo $hasil ?></th>
-                <th colspan="2">(Belum Lunas)</th>
-                <th><?php $galbay = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT sum(totalbayar) as galbay FROM tboking where statusbayar='B' ORDER BY noInvoice ASC");
-                    $data_galbay = mysqli_fetch_array($galbay);
-                    $hasil2 = idr_f($data_galbay['galbay']);
-                    if ($no % 2 == 1) {
-                      $class = "gradeU";
-                    } else {
-                      $class = "gradeX";
-                    }
-                    echo $hasil2 ?></th>
+                    echo $hasil3 ?> (DP)</th>
               </tfoot>
             </table>
           </div>

@@ -12,27 +12,27 @@
                           <form action="prosesBoking.php?p=boking&action=selesai-boking" method="post" enctype="multipart/form-data">
                               <div class="row">
                                   <div class="col-md-6">
+                                      <label>Nama Lengkap</label>
                                       <div class="form-group form-control-material">
-                                          <input type="text" class="form-control" name="txtNmLengkap" placeholder="Nama Lengkap">
-                                          <label>Nama Lengkap</label>
+                                          <input type="text" class="form-control" id="wiz-lusername" name="txtNmLengkap" placeholder="Nama Lengkap">
                                       </div>
                                   </div>
                                   <div class="col-md-6">
+                                      <label>Email</label>
                                       <div class="form-group form-control-material">
-                                          <input type="email" class="form-control" name="txtEmail" placeholder="Your last name">
-                                          <label>Email</label>
+                                          <input type="email" class="form-control" id="wiz-email" name="txtEmail" placeholder="Your last name">
                                       </div>
                                   </div>
                                   <div class="col-md-6">
+                                      <label>No.Hp/Telpon</label>
                                       <div class="form-group form-control-material">
-                                          <input type="number" class="form-control" name="txtKontak" placeholder="Nama Lengkap">
-                                          <label>No.Hp/Telpon</label>
+                                          <input type="number" class="form-control" id="wiz-nohp1" name="txtKontak" placeholder="Nama Lengkap">
                                       </div>
                                   </div>
                                   <div class="col-md-6">
+                                      <label>Alamat</label>
                                       <div class="form-group form-control-material">
                                           <input type="text" name="txtAlamat" class="form-control" placeholder="Alamat">
-                                          <label>Alamat</label>
                                       </div>
                                   </div>
                               </div>
