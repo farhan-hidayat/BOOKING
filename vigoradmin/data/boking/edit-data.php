@@ -172,15 +172,17 @@ echo"
 						<input type='hidden' name='id' value='$_data[kdBoking]'>
 						";
 						if($_data['statusBayar']=="L"){
-							echo"
+							echo "
 							<input type='radio' value='L' name='rbStatus' checked> Lunas
+							<input type='radio' value='D' name='rbStatus'> DP
 							<input type='radio' value='B' name='rbStatus'> Belum Lunas
 							";
 							
 							
 							}else{
-								echo"
+								echo "
 							<input type='radio' value='L' name='rbStatus'> Lunas
+							<input type='radio' value='D' name='rbStatus'> DP
 							<input type='radio' value='B' name='rbStatus' checked> Belum Lunas
 							";
 								
@@ -210,4 +212,3 @@ echo"
       </div>
     </div>
   </div>";
- ?>

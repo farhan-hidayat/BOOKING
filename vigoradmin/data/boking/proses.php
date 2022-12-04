@@ -36,12 +36,12 @@ if(isset($_SESSION['username']) AND isset($_SESSION['password'])){
 	}
 	}elseif($loadPage=="boking" AND $action=="hapusData"){
 		
-		mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM tboking_temp WHERE kdbokingTemp=$_GET[id]")or die (mysqli_error($GLOBALS["___mysqli_ston"]));
+		mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM tboking WHERE kdboking=$_GET[id]")or die (mysqli_error($GLOBALS["___mysqli_ston"]));
 		
 	echo"
 	<script language='javascript'>
 	window.alert('Data Berhasil Dihapus');
-	window.location=('../../frame.php?load=boking&action=input')
+	window.location=('../../frame.php?load=boking')
 	</script>
 	";
 		
@@ -130,4 +130,3 @@ mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE tjadwal SET statusBoking='B' WH
 		
 		";
 		}
-?>
