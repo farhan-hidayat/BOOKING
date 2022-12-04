@@ -62,7 +62,7 @@
       <div class="span12">
         <div class="widget-box">
           <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-            <h5>Semua Data Boking</h5>
+            <h5>Semua Data Boking Belum Bayar</h5>
           </div>
           <div class="widget-content nopadding">
             <table class="table table-bordered data-table">
@@ -74,13 +74,11 @@
                   <th>Atas Nama</th>
                   <th>Kontak</th>
                   <th>Total Bayar</th>
-                  <th>Status Bayar</th>
-
                 </tr>
               </thead>
               <tbody>
                 <?php
-                $SQL = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM tboking  ORDER BY noInvoice ASC");
+                $SQL = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM tboking where statusbayar='B' ORDER BY noInvoice ASC");
                 $no = 1;
                 while ($_data = mysqli_fetch_array($SQL)) {
                   $tglInvoice = region($_data['tglInvoice']);
@@ -92,74 +90,157 @@
                   }
 
                   echo "
-				  <tr class='$class'>
-                  <td>$no</td>
-				  <td>$_data[noInvoice]</td>
-				  <td>$tglInvoice</td>
-				  <td>$_data[an]</td>
-				  <td>$_data[kontak]</td>
-				  <td>$total</td>
-				  <td>";
-                  if ($_data['statusBayar'] == "L") {
-                    echo "Lunas";
-                  } elseif ($_data['statusBayar'] == "B") {
-                    echo "Belum Lunas";
-                  } else {
-                    echo "DP";
-                  }
-
-                  echo "</td>
-				 
-                  
-                       </tr> 
-				   
-				   ";
-
-
+                  <tr class='$class'>
+                          <td>$no</td>
+                  <td>$_data[noInvoice]</td>
+                  <td>$tglInvoice</td>
+                  <td>$_data[an]</td>
+                  <td>$_data[kontak]</td>
+                  <td>$total</td>
+                  ";
                   $no++;
                 }
                 ?>
-
-
               </tbody>
               <tfoot>
-                <th colspan="2">Total</th>
-                <th colspan="2"><?php $lunas = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT sum(totalbayar) as lunas FROM tboking where statusbayar='L' ORDER BY noInvoice ASC");
-                                $data_lunas = mysqli_fetch_array($lunas);
-                                $hasil = idr_f($data_lunas['lunas']);
-                                if ($no % 2 == 1) {
-                                  $class = "gradeU";
-                                } else {
-                                  $class = "gradeX";
-                                }
-                                echo $hasil ?> (Lunas)</th>
-                <th colspan="2"><?php $galbay = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT sum(totalbayar) as galbay FROM tboking where statusbayar='B' ORDER BY noInvoice ASC");
-                                $data_galbay = mysqli_fetch_array($galbay);
-                                $hasil2 = idr_f($data_galbay['galbay']);
-                                if ($no % 2 == 1) {
-                                  $class = "gradeU";
-                                } else {
-                                  $class = "gradeX";
-                                }
-                                echo $hasil2 ?> (Belum Lunas)</th>
-                <th><?php $dp = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT sum(totalbayar) as dp FROM tboking where statusbayar='D' ORDER BY noInvoice ASC");
-                    $data_dp = mysqli_fetch_array($dp);
-                    $ddp = $data_dp['dp'] / 2;
-                    $hasil3 = idr_f($ddp);
+                <th colspan="5">Total</th>
+                <th><?php $galbay = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT sum(totalbayar) as galbay FROM tboking where statusbayar='B' ORDER BY noInvoice ASC");
+                    $data_galbay = mysqli_fetch_array($galbay);
+                    $hasil = idr_f($data_galbay['galbay']);
                     if ($no % 2 == 1) {
                       $class = "gradeU";
                     } else {
                       $class = "gradeX";
                     }
-                    echo $hasil3 ?> (DP)</th>
+                    echo $hasil ?></th>
               </tfoot>
             </table>
           </div>
         </div>
+      </div>
+    </div>
 
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+            <h5>Semua Data Boking Sudah Lunas</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <table class="table table-bordered data-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>No.Invoice</th>
+                  <th>Tgl Invoice</th>
+                  <th>Atas Nama</th>
+                  <th>Kontak</th>
+                  <th>Total Bayar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $SQL = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM tboking where statusbayar='L' ORDER BY noInvoice ASC");
+                $no = 1;
+                while ($_data = mysqli_fetch_array($SQL)) {
+                  $tglInvoice = region($_data['tglInvoice']);
+                  $total = idr_f($_data['totalBayar']);
+                  if ($no % 2 == 1) {
+                    $class = "gradeU";
+                  } else {
+                    $class = "gradeX";
+                  }
 
+                  echo "
+                  <tr class='$class'>
+                          <td>$no</td>
+                  <td>$_data[noInvoice]</td>
+                  <td>$tglInvoice</td>
+                  <td>$_data[an]</td>
+                  <td>$_data[kontak]</td>
+                  <td>$total</td>
+                  ";
+                  $no++;
+                }
+                ?>
+              </tbody>
+              <tfoot>
+                <th colspan="5">Total</th>
+                <th><?php $lunas = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT sum(totalbayar) as lunas FROM tboking where statusbayar='L' ORDER BY noInvoice ASC");
+                    $data_lunas = mysqli_fetch_array($lunas);
+                    $hasil = idr_f($data_lunas['lunas']);
+                    if ($no % 2 == 1) {
+                      $class = "gradeU";
+                    } else {
+                      $class = "gradeX";
+                    }
+                    echo $hasil ?></th>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+            <h5>Semua Data Boking DP</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <table class="table table-bordered data-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>No.Invoice</th>
+                  <th>Tgl Invoice</th>
+                  <th>Atas Nama</th>
+                  <th>Kontak</th>
+                  <th>Total Bayar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $SQL = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM tboking where statusbayar='D' ORDER BY noInvoice ASC");
+                $no = 1;
+                while ($_data = mysqli_fetch_array($SQL)) {
+                  $tglInvoice = region($_data['tglInvoice']);
+                  $total = idr_f($_data['totalBayar'] / 2);
+                  if ($no % 2 == 1) {
+                    $class = "gradeU";
+                  } else {
+                    $class = "gradeX";
+                  }
 
+                  echo "
+                  <tr class='$class'>
+                          <td>$no</td>
+                  <td>$_data[noInvoice]</td>
+                  <td>$tglInvoice</td>
+                  <td>$_data[an]</td>
+                  <td>$_data[kontak]</td>
+                  <td>$total</td>
+                  ";
+                  $no++;
+                }
+                ?>
+              </tbody>
+              <tfoot>
+                <th colspan="5">Total</th>
+                <th><?php $dp = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT sum(totalbayar) as dp FROM tboking where statusbayar='D' ORDER BY noInvoice ASC");
+                    $data_dp = mysqli_fetch_array($dp);
+                    $hasil = idr_f($data_dp['dp'] / 2);
+                    if ($no % 2 == 1) {
+                      $class = "gradeU";
+                    } else {
+                      $class = "gradeX";
+                    }
+                    echo $hasil ?></th>
+              </tfoot>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
 
