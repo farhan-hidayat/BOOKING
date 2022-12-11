@@ -12,58 +12,58 @@
         </div>
         <div class="widget-content nopadding">
           <form action="data/jadwal/proses.php?load=jadwal&action=simpanData" method="POST" class="form-horizontal" enctype="multipart/form-data">
-           <div class="control-group">
+            <div class="control-group">
               <label class="control-label">Tanggal</label>
               <div class="controls">
-                <div  data-date="12-02-2017" class="input-append date datepicker">
-                  <input type="date"  data-date-format="dd-mm-yyyy" class="span11" name="txtTglJadwal" >
-                  <span class="add-on"><i class="icon-th"></i></span> </div>
+                <div data-date="12-02-2017" class="input-append date datepicker">
+                  <input type="date" data-date-format="dd-mm-yyyy" class="span11" name="txtTglJadwal">
+                  <span class="add-on"><i class="icon-th"></i></span>
+                </div>
               </div>
             </div>
-          <div class="control-group">
+            <div class="control-group">
               <label class="control-label">Nomor Lapangan</label>
               <div class="controls">
-                <select name="cboLapangan" >
+                <select name="cboLapangan">
                   <option>-- Pilih Nomor Lapangan --</option>
-                 <?php
-				 $lapangan=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM tlapangan ORDER BY noLapangan ASC");
-				 while($lap=mysqli_fetch_array($lapangan)){
-					 echo"<option value='$lap[kdLapangan]'>$lap[noLapangan]</option>";
-					 }
-				 ?>
+                  <?php
+                  $lapangan = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM tlapangan ORDER BY noLapangan ASC");
+                  while ($lap = mysqli_fetch_array($lapangan)) {
+                    echo "<option value='$lap[kdLapangan]'>$lap[noLapangan]</option>";
+                  }
+                  ?>
                 </select>
               </div>
             </div>
-              <div class="control-group">
+            <div class="control-group">
               <label class="control-label">Jam</label>
               <div class="controls">
-                <select name="cboJam" >
+                <select name="cboJam">
                   <option>-- Pilih Jam Operasional--</option>
-                 <?php
-				 $jam=mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM tjam ORDER BY jam ASC");
-				 while($j=mysqli_fetch_array($jam)){
-					 echo"<option value='$j[kdJam]'>$j[jam]</option>";
-					 }
-				 ?>
+                  <?php
+                  $jam = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM tjam ORDER BY jam ASC");
+                  while ($j = mysqli_fetch_array($jam)) {
+                    echo "<option value='$j[kdJam]'>$j[jam]</option>";
+                  }
+                  ?>
                 </select>
               </div>
             </div>
-            
+
             <div class="control-group">
               <label class="control-label">Harga :</label>
               <div class="controls">
-                <input type="text" class="span2"  name="txtHarga" />
+                <input type="text" class="span2" name="txtHarga" />
               </div>
             </div>
-              
-           
+
+
             <div class="form-actions">
               <button type="submit" class="btn btn-success">Simpan</button>
             </div>
           </form>
         </div>
       </div>
-     </div>
-     </div>
-     </div>
- 
+    </div>
+  </div>
+</div>
