@@ -14,7 +14,7 @@ if(isset($_SESSION['username']) AND isset($_SESSION['password'])){
 		  $filenameenkrip = $enkrip.$filename;
 		
 	if(empty($addres_file)){
-		$SQL="INSERT INTO tlapangan (noLapangan,deskripsi) VALUES ('$_POST[txtNoLapangan]','$_POST[txtDeskripsi]')";
+		$SQL="INSERT INTO tlapangan (noLapangan,harga,deskripsi) VALUES ('$_POST[txtNoLapangan]','$_POST[harga]','$_POST[txtDeskripsi]')";
 	mysqli_query($GLOBALS["___mysqli_ston"], $SQL) or die (mysqli_error($GLOBALS["___mysqli_ston"]));
     echo"
 	<script language='javascript'>
@@ -33,7 +33,7 @@ if(isset($_SESSION['username']) AND isset($_SESSION['password'])){
 				  }else{
 					  
 		upLapangan($filenameenkrip);
-		$SQL="INSERT INTO tlapangan (noLapangan,deskripsi,gambarLapangan) VALUES ('$_POST[txtNoLapangan]','$_POST[txtDeskripsi]','$filenameenkrip')";
+		$SQL="INSERT INTO tlapangan (noLapangan,harga,deskripsi,gambarLapangan) VALUES ('$_POST[txtNoLapangan]','$_POST[harga]','$_POST[txtDeskripsi]','$filenameenkrip')";
 	mysqli_query($GLOBALS["___mysqli_ston"], $SQL) or die (mysqli_error($GLOBALS["___mysqli_ston"]));
     echo"
 	<script language='javascript'>
@@ -79,6 +79,7 @@ if(isset($_SESSION['username']) AND isset($_SESSION['password'])){
 		  $filenameenkrip = $enkrip.$filename;
 			if(empty($addres_file)){
 	$SQL="UPDATE tlapangan SET noLapangan='$_POST[txtNoLapangan]',
+	harga='$_POST[harga]',
 							   deskripsi='$_POST[txtDeskripsi]'
 							    
 		  WHERE kdLapangan='$_POST[id]'";	
@@ -102,6 +103,7 @@ if(isset($_SESSION['username']) AND isset($_SESSION['password'])){
 				  }else{
 				upLapangan($filenameenkrip);
 					$SQL="UPDATE tlapangan SET noLapangan='$_POST[txtNoLapangan]',
+					harga='$_POST[harga]',
 							   deskripsi='$_POST[txtDeskripsi]',
 							   gambarLapangan='$filenameenkrip'
 							    
@@ -128,4 +130,3 @@ if(isset($_SESSION['username']) AND isset($_SESSION['password'])){
 		
 		";
 		}
-?>

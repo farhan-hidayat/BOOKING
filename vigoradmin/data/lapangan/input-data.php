@@ -18,26 +18,31 @@
                 <input type="text" class="span2" placeholder="Nomor Lapangan" name="txtNoLapangan" />
               </div>
             </div>
-                <div class="control-group">
+            <div class="control-group">
+              <label class="control-label">Harga Sewa :</label>
+              <div class="controls">
+                <input type="text" class="span2" placeholder="Harga Sewa" name="harga" />
+              </div>
+            </div>
+            <div class="control-group">
               <label class="control-label">Gambar Lapangan :</label>
               <div class="controls">
                 <input type="file" class="span12" placeholder="First name" name="upPhoto" />
               </div>
             </div>
-           <div class="control-group">
+            <div class="control-group">
               <label class="control-label">Deskripsi :</label>
               <div class="controls">
-                 <textarea name="txtDeskripsi" class="textarea_editor span12" rows="12" placeholder="Enter text ..."></textarea>
+                <textarea name="txtDeskripsi" class="textarea_editor span12" rows="12" placeholder="Enter text ..."></textarea>
               </div>
             </div>
-            
+
             <div class="form-actions">
               <button type="submit" class="btn btn-success">Simpan</button>
             </div>
           </form>
         </div>
       </div>
-     </div>
-     </div>
-     </div>
-     
+    </div>
+  </div>
+</div>
