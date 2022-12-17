@@ -3,6 +3,7 @@
   $_data = mysqli_fetch_array($SQL);
   $tgl = region($_data['tglInvoice']);
   $totalBayar = idr_f($_data['totalBayar']);
+  $ddp = idr_f($_data['totalBayar'] / 2);
   echo "
   <div class='container'>
         <div class='jumbotron text-center bg-transparent margin-none'>
@@ -46,8 +47,51 @@
     echo "<strong><label class='label label-success'>LUNAS</label></strong>";
   } elseif ($_data['statusBayar'] == "B") {
     echo "<strong><label class='label label-danger'>BELUM LUNAS</label></strong>";
+  } else {
+    echo "<strong><label class='label label-warning'>DP</label></strong>";
   }
-  echo "</td>
+  if ($_data['statusBayar'] == "D") {
+    echo "</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>ALAMAT</td>
+      <td>$_data[alamat]</td>
+      <td>TGL. INVOICE</td>
+      <td colspan='2'>$tgl</td>
+    </tr>
+    <tr>
+      <td rowspan='2'><strong>RINCIAN BOKING</strong></td>
+      <td>EMAIL</td>
+      <td>$_data[email]</td>
+      <td><h4><strong>TOTAL BAYAR</strong></h4></td>
+      <td colspan='2'><h4><label class='label label-success'>Rp. $ddp</label></h4></td>
+    </tr>
+    <tr>
+      <td>KONTAK</td>
+      <td>$_data[kontak]</td>
+      <td>&nbsp;</td>
+      <td width='12%'>&nbsp;</td>
+      <td width='7%'>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><strong>TGL.BOKING</strong></td>
+      <td><strong>JAM</strong></td>
+      <td><strong>NOMOR LAPANGAN</strong></td>
+      <td><strong>HARGA</strong></td>
+      <td><strong>SUBTOTAL</strong></td>
+      <td><strong>SISA</strong></td>
+    </tr>";
+  } else {
+    echo "</td>
     </tr>
     <tr>
       <td>&nbsp;</td>
@@ -86,6 +130,8 @@
       <td><strong>SUBTOTAL</strong></td>
       <td><strong>SISA</strong></td>
     </tr>";
+  }
+
   $rincian = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM trincian_boking,tboking WHERE trincian_boking.kdBoking=tboking.kdBoking AND trincian_boking.kdBoking='$_data[kdBoking]'");
   while ($r = mysqli_fetch_array($rincian)) {
     $tglboking = region($r['tglBoking']);
