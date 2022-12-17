@@ -7,9 +7,6 @@
           <div class="row">
               <div class="col-md-12 col-lg-12">
                   <h4 class="page-section-heading"> DAFTAR INVOICE </h4>
-                  <a href="?p=keranjang-boking"><button class="btn btn-success"><i class="icon-plus"></i> &nbsp; Booking Lapangan</button></a>
-                  </br>
-                  </br>
                   <div class="panel panel-default">
                       <!-- Data table -->
                       <table data-toggle="data-table" class="table" cellspacing="0" width="100%">

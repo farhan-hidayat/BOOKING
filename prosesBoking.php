@@ -88,7 +88,7 @@ if (isset($_SESSION['username']) and isset($_SESSION['password'])) {
 			$jml          = count($isikeranjang);
 
 			$id = $_SESSION["username"];
-			$jadwal = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM tjadwal WHERE idSession='$id'") or die(mysqli_error($GLOBALS["___mysqli_ston"]));
+			$jadwal = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM tjadwal WHERE idSession='$id' ORDER BY kdJadwal desc") or die(mysqli_error($GLOBALS["___mysqli_ston"]));
 			$_data = mysqli_fetch_array($jadwal);
 
 			for ($i = 0; $i < $jml; $i++) {
