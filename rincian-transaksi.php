@@ -1,5 +1,5 @@
  <?php
-  $SQL = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM tboking WHERE usernameboking='$_SESSION[username]'");
+  $SQL = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM tboking WHERE usernameboking='$_SESSION[username]' ORDER BY kdBoking desc");
   $_data = mysqli_fetch_array($SQL);
   $tgl = region($_data['tglInvoice']);
   $totalBayar = idr_f($_data['totalBayar']);
@@ -83,23 +83,39 @@
       <td><strong>JAM</strong></td>
       <td><strong>NOMOR LAPANGAN</strong></td>
       <td><strong>HARGA</strong></td>
-      <td colspan='2'><strong>SUBTOTAL</strong></td>
+      <td><strong>SUBTOTAL</strong></td>
+      <td><strong>SISA</strong></td>
     </tr>";
-  $rincian = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM trincian_boking WHERE kdBoking='$_data[kdBoking]'");
+  $rincian = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM trincian_boking,tboking WHERE trincian_boking.kdBoking=tboking.kdBoking AND trincian_boking.kdBoking='$_data[kdBoking]'");
   while ($r = mysqli_fetch_array($rincian)) {
     $tglboking = region($r['tglBoking']);
     $harga = idr_f($r['hargaBoking']);
     $subtotal = idr_f($r['subTotal']);
-    echo "
-		<tr>
-      <td><label class='label label-primary'><strong>$tglboking</strong></label></td>
-      <td><label class='label label-primary'><strong>$r[jamBoking]</strong></label></td>
-      <td><label class='label label-primary'><strong>$r[noLapangan]</strong></label></td>
-      <td><label class='label label-primary'><strong>Rp. $harga</strong></label></td>
-      <td colspan='2'><label class='label label-danger'><strong>Rp. $subtotal</strong></label></td>
-    </tr>
-		
-		";
+    $sisa = idr_f($r['subTotal'] / 2);
+
+    if ($r['statusBayar'] == "D") {
+      echo "
+      <tr>
+        <td><label class='label label-primary'><strong>$tglboking</strong></label></td>
+        <td><label class='label label-primary'><strong>$r[jamBoking]</strong></label></td>
+        <td><label class='label label-primary'><strong>$r[noLapangan]</strong></label></td>
+        <td><label class='label label-primary'><strong>Rp. $harga</strong></label></td>
+        <td><label class='label label-danger'><strong>Rp. $subtotal</strong></label></td>
+        <td><label class='label label-warning'><strong>Rp. $sisa</strong></label></td>
+      </tr>
+      ";
+    } elseif ($r['statusBayar'] == "B") {
+      echo "
+      <tr>
+        <td><label class='label label-primary'><strong>$tglboking</strong></label></td>
+        <td><label class='label label-primary'><strong>$r[jamBoking]</strong></label></td>
+        <td><label class='label label-primary'><strong>$r[noLapangan]</strong></label></td>
+        <td><label class='label label-primary'><strong>Rp. $harga</strong></label></td>
+        <td><label class='label label-danger'><strong>Rp. $subtotal</strong></label></td>
+        <td><label class='label label-warning'><strong>Rp. 0</strong></label></td>
+      </tr>
+      ";
+    }
   }
   echo "
     <tr>

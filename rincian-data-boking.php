@@ -35,6 +35,16 @@
                                           <input type="text" name="txtAlamat" class="form-control" placeholder="Alamat">
                                       </div>
                                   </div>
+                                  <div class="col-md-6">
+                                      <label>Pembayaran</label>
+                                      <div class="form-group form-control-material">
+                                          <select name="bayar">
+                                              <option>-- Pilih Pembayaran --</option>
+                                              <option value='L'>Full Payment</option>
+                                              <option value='D'>DP</option>
+                                          </select>
+                                      </div>
+                                  </div>
                               </div>
 
                               <button type="submit" class="btn btn-primary">Selesai Boking</button>

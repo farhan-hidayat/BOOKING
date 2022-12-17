@@ -75,13 +75,12 @@ if (isset($_SESSION['username']) and isset($_SESSION['password'])) {
 			$noOrder++;
 			$char = "INV-";
 			$newID = $char . sprintf("%06s", $noOrder);
-			$lunas = "B";
 			$tot = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT SUM(subTotalTemp) AS total FROM tboking_temp WHERE idSession='$_SESSION[username]'");
 			$t = mysqli_fetch_array($tot);
 
 			mysqli_query($GLOBALS["___mysqli_ston"], "INSERT INTO tboking(noInvoice,tglInvoice,usernameBoking,an,alamat,email,kontak,totalBayar,statusBayar)
 			VALUES ('$newID','$tgl_skrg','$_SESSION[username]','$_POST[txtNmLengkap]',
-					'$_POST[txtAlamat]','$_POST[txtEmail]','$_POST[txtKontak]','$t[total]','$lunas')");
+					'$_POST[txtAlamat]','$_POST[txtEmail]','$_POST[txtKontak]','$t[total]','$_POST[bayar]')");
 
 			$id_orders = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 			$isikeranjang = isi_keranjang();
@@ -102,7 +101,7 @@ if (isset($_SESSION['username']) and isset($_SESSION['password'])) {
 			mysqli_query($GLOBALS["___mysqli_ston"], "DELETE FROM tboking_temp
 	  	         WHERE idSession = '$_SESSION[username]'");
 
-			header('location:frame.php?p=tampil-invoice');
+			header('location:frame.php?p=rincian-transaksi');
 		}
 	}
 } else {
